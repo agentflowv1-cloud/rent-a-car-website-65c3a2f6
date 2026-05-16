@@ -1,17 +1,26 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
-import Home from './pages/Home';
-import About from './pages/About';
+import { Link } from 'react-router-dom';
+import CarModelCard from './components/CarModelCard';
+import './styles/app.css';
+const carModels = [
+  { id: 1, name: 'Toyota Camry', features: ['Heated Seats', 'Bluetooth'], price: 25000, available: true },
+  { id: 2, name: 'Honda Civic', features: ['Sunroof', 'Backup Camera'], price: 20000, available: false },
+  { id: 3, name: 'Ford Mustang', features: ['Leather Seats', 'Navigation'], price: 30000, available: true }
+];
 
-function App() {
+const App = () => {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-      </Routes>
-    </BrowserRouter>
+    <div className="app">
+      <h1>Car Models</h1>
+      <div className="car-model-cards">
+        {carModels.map((carModel) => (
+          <Link to={`/car-models/${carModel.id}`} key={carModel.id}>
+            <CarModelCard carModel={carModel} />
+          </Link>
+        ))}
+      </div>
+    </div>
   );
-}
+};
 
 export default App;
